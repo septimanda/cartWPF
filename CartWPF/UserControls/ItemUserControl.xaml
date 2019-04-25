@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="CartWPF.UserControls.ItemUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CartWPF.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600"
+             Loaded="UserControl_Loaded">
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="Slide_TransitionContent" OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.2}">
+            <StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="ITEM" VerticalAlignment="Top" TextAlignment="Center" FontFamily="Verdana" FontSize="25" Margin="25"/>
+                    <DataGrid x:Name="Item_DataGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="180" Width="513" AutoGenerateColumns="False" SelectedCellsChanged="Item_DataGrid_SelectedCellsChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Item Name" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Item Stock" Binding="{Binding Stock}" Width="80"/>
+                            <DataGridTextColumn Header="Item Price" Binding="{Binding Price}" Width="80"/>
+                            <DataGridTextColumn Header="Supplier Name" Binding="{Binding Suppliers.Name}" Width="*"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Height" Value="30"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30">
+                    <StackPanel Margin="15">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Center" FontSize="16" Width="115"/>
+                            <TextBox x:Name="ItemName_Txt" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="16"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Item Stock" VerticalAlignment="Center" FontSize="16" Width="115"/>
+                            <TextBox x:Name="ItemStock_Txt" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="16" PreviewTextInput="Item_Txt_PreviewTextInput"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Item Price" VerticalAlignment="Center" FontSize="16" Width="115"/>
+                            <TextBox x:Name="ItemPrice_Txt" HorizontalAlignment="Left" Height="35" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" FontSize="16" PreviewTextInput="Item_Txt_PreviewTextInput" LostFocus="ItemPrice_Txt_LostFocus"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Supplier Name" VerticalAlignment="Center" FontSize="16" Width="115"/>
+                            <ComboBox x:Name="Supplier_comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="235" Height="35" FontSize="16" Text="Pick One"
+                                ItemsSource="{Binding Source= SupplierList}" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+                        </StackPanel>
+                        <TextBox x:Name="ItemId_Txt" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="26" Visibility="Collapsed" />
+                    </StackPanel>
+                    <StackPanel Margin="0,25,0,0">
+                        <Button x:Name="SaveItem_Btn" Content="Save Item" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" Margin="10" Click="SaveItem_Btn_Click"/>
+                        <Button x:Name="DeleteItem_Btn" Content="Delete Item" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" Margin="10" Click="DeleteItem_Btn_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>
